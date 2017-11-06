@@ -1,0 +1,320 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+% for institute information	
+\usepackage{authblk}	
+
+% definition of keywords
+\def\keywords{\vspace{.5em}
+	{\bfseries\textit{Keywords}---\,\relax%
+}}
+\def\endkeywords{\par}
+
+% Packages for table
+\usepackage{longtable}
+
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage[tight,footnotesize]{subfigure}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usepackage{filecontents}
+\usepackage{cite}
+
+\begin{document}
+\title{Recent advances of Malaria parasites detection systems based on mathematical morphology techniques}
+
+\author[1]{Andrea Loddo}
+\author[1]{Cecilia Di Ruberto}
+\author[2]{Michel Kocher}
+
+\affil[1]{Department of Mathematics and Computer Science\\	Via Ospedale 72, 09124, Cagliari, Italy}
+\affil[ ]{\textit {\{andrea.loddo, dirubert\}@unica.it}}
+\affil[2]{Biomedical Imaging Group, École Polytechnique
+	Fédérale de Lausanne (EPFL), CH-1015 Lausanne, Switzerland}
+\affil[ ]{\textit {michel.kocher@heig-vd.ch}}
+\date{}                     %% if you don't need date to appear
+\setcounter{Maxaffil}{0}
+\renewcommand\Affilfont{\itshape\small}
+
+\maketitle
+
+\begin{abstract}
+	This paper investigates existing mathematical morphology based techniques applied for performing malaria parasites detection and identification in both Giemsa and Leishman stained blood smears images.
+	Malaria is an epidemic health disease and a rapid, accurate diagnosis is necessary for proper intervention. Generally, pathologists visually examine blood stained slides for malaria diagnosis; this kind of visual inspection is subjective, error-prone and time consuming. In order to cope with such issues, computer-aided methods have been increasingly evolved for abnormal erythrocyte detection, segmentation and semi/fully automated classification. The aim of this paper is to present a review on the methods that are based on mathematical morphology techniques for malaria parasite detection.
+	
+	\keywords{malaria, red blood cells segmentation, mathematical morphology, medical image analysis}
+\end{abstract}
+
+\section{Introduction}
+Haematology is the branch of medicine concerned with the study, diagnosis, monitoring, treatment, and prevention of diseases related to the blood and blood-forming organs. Haematology studies the blood in health and pathological conditions, firstly to identify the patient's health condition and, secondly, to predict how the bone marrow may have contributed to reach that condition.
+
+Thus, haematology studies the relationship between the bone marrow and the systemic circulation. In fact, there are many diseases, disorders, and deficiencies that can affect the number and type of blood cells produced, their function and their lifespan. Usually, only normal, mature or nearly mature cells are released into the bloodstream but certain circumstances can induce the bone marrow to release immature and/or abnormal cells into the circulation. One of the most frequently ordered test to monitor the proportion of the cell components into the blood stream is the Complete Blood Count (CBC), that offers various haematologic data represented by the numbers and types of cells in the peripheral circulation. The cells percentage is compared with the reference ranges in order to determine if the cells are present in their expected percentage, if one cell type is increased, decreased or if immature cells exist. Reference ranges for blood tests are sets of values used to interpret a set of diagnostic test results from blood samples. Since it is difficult to prove that healthy-considered subjects may not have infections, parasitic infection and nutritional deficiency, it is more feasible to talk about reference ranges rather than normal ranges. A reference range is usually defined as the set of values in which 95\% of the normal population falls within. It is determined by collecting data from vast numbers of laboratory tests result from a large number of subjects who are assumed to be representative of the population. With automatic counters or the flow cytometry an automated CBC can be performed quickly. However, if the results from an automated cell count indicate the presence of abnormal cells or if there is a reason to suspect that abnormal cells are present, then a blood smear will be collected \cite{Loddo2016}. A blood smear is often used to categorize and/or identify conditions that affect one or more types of blood cells and to monitor individuals undergoing treatment for these conditions. The results of a blood smear typically include a description of the cells appearance, as well as any abnormalities that may be seen on the slide. The manual analysis of blood smears is tedious, lengthy, repetitive and it suffers from the presence of a non-standard precision because it depends on the operator's skill. The use of image processing techniques can help to analyse, count the cells in human blood and, at the same time, to provide useful and precise information about cells morphology.
+
+Peripheral blood smears analysis is a common and economical diagnosis technique by which expert pathologists may obtain health information about the patients. Although this procedure requires highly trained experts, it is error-prone and could be affected by inter-observer variations. Moreover, blood cells images taken from microscope could vary in their illumination and colouration conditions. Typical blood cells images contain three main components of interest: the platelets (or thrombocytes), the red blood cells (or erythrocytes) and the white blood cells (or leukocytes). It is worth considering that blood cells exist with different shapes, characteristics and colourations, according to their types.
+
+Many tests are designed to determine the number of erythrocytes and leukocytes in the blood, together with the volume, sedimentation rate, and haemoglobin concentration of the red blood cells (blood count). In addition, certain tests are used to classify blood according to specific red blood cell antigens, or blood groups. Other tests elucidate the shape and structural details of blood cells and haemoglobin and other blood proteins. Blood can be analysed to determine the activity of various enzymes, or protein catalysts, that either are associated with the blood cells or are found free in the blood plasma.
+Blood also may be analysed on the basis of properties such as total volume, circulation time, viscosity, clotting time and clotting abnormalities, acidity (pH), levels of oxygen and carbon dioxide, and the clearance rate of various substances. There are special tests based on the presence in the blood of substances characteristic of specific infections, such as the serological tests for syphilis, hepatitis, and human immunodeficiency virus (HIV, the AIDS virus) \footnote{https://www.britannica.com/topic/blood-analysis}.
+
+Among the several available blood tests, the most common are certainly the blood cells counts, e.g., a CBC is a measure of the haematologic parameters of the blood. Included in the CBC is the calculation of the number of red blood cells (red blood cell count) or white blood cells (white blood cell count) in a cubic millimetre $(mm^{3})$ of blood, a differential white blood cell count, a haemoglobin assay, a hematocrit, calculations of red cell volume, and a platelet count. The differential white blood cell count includes measurements of the different types of white blood cells that constitute the total white blood cell count: the band neutrophils, segmented neutrophils, lymphocytes, monocytes, eosinophils, and basophils. A specific infection can be suspected on the basis of the type of leukocyte that has an abnormal value.
+
+Human malaria infection is not strongly related to cells count but it needs different tests in order to be identified. It can only be caused by parasitic protozoans belonging to the Plasmodium type. The parasites are spread to people through the bites of infected female Anopheles mosquitoes, called "malaria vectors".
+There are five parasite species that cause malaria in humans and two of these species, Plasmodium falciparum and Plasmodium vivax, constitute the greatest threat. Plasmodium ovale, Plasmodium malariae and Plasmodium knowlesi are the three remaining species which are less dangerous in human \cite{WHO_dec_2016}, as shown in fig.\ref{fig:malaria_types}.
+All five species may appear in four different life-cycle stages during the infection phase in peripheral blood: ring, trophozoite, schizont and gametocyte. Some examples are shown in fig.\ref{fig:malaria_stages}.
+The life-cycle-stage of the parasite is defined by its morphology, size and the presence or absence of malarial pigment.
+The species differ in the changes of infected cell's shape, presence of some characteristic dots and the morphology of the parasite in some of the life-cycle-stages \cite{Somasekar2011}.
+
+Computer vision techniques for malaria diagnosis and recognition represent a relatively new area for early malaria detection and, in general, for medical imaging, able to overcome the problems related to manual analysis, that is performed by human visual examination of blood smears. The whole process requires an ability to differentiate between non-parasitic stained components/bodies (e.g. red blood cells, white blood cells, platelets, and artefacts) and the malarial parasites using visual information. If the blood sample is diagnosed as positive (i.e. parasites present) an additional capability of differentiating species and life-stages (i.e. identification) is required to specify the infection. Numerous methods of automatic malaria diagnosis have been proposed so far, in order to overcome the issues before mentioned. The aim of this paper is to review and analyse the works of different researchers who in particular have used mathematical morphology as a tool for computer aided malaria detection and classification.
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=2.75cm]{img/f3_Pfalciparum}
+	\includegraphics[width=2.75cm]{img/f3_Pvivax}
+	\includegraphics[width=2.75cm]{img/f3_Povale}
+	\includegraphics[width=2.75cm]{img/f3_Pmalariae}
+	\caption{\label{fig:malaria_types}Types of human malaria: from left to right, P. Falciparum, P. Vivax, P. Ovale, P. Malariae \cite{Khan2011}.}
+\end{figure}
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=2.75cm, height=2.75cm]{img/1_Pfalciparum_ring}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/2_Pfalciparum_trophozoite}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/3_Pfalciparum_gametocyte}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/4_Pfalciparum_schizont}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/5_Pmalariae_ring}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/6_Pmalariae_schizont}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/7_Povale_trophozoites}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/8_Pvivax_trophozoites}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/9_Pvivax_ring}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/10_Pvivax_gametocyte}
+	\includegraphics[width=2.75cm, height=2.75cm]{img/11_Pvivax_ring}
+	\caption{\label{fig:malaria_stages}Examples of malaria parasite stages. From top left: P.falciparum ring, trophozoite, gametocyte, schizont; P.malariae ring and schizont; P.ovale and P.vivax trophozoites; P.vivax ring and gametocyte; P.vivax ring \cite{Tek2010}}
+\end{figure}
+
+\subsection{Mathematical morphology}
+Mathematical morphology (MM) can be defined as a theory for the analysis of spatial structures. It is called morphology because it aims at analysing the shape and form of objects. It is mathematical in the sense that the analysis is based on set theory, integral geometry, and lattice algebra. MM is not only a theory, but also a very powerful image analysis technique \cite{Soille2004}.
+It was introduced by Matheron as a technique for analysing geometric structure of metallic and geologic samples. It refers to a branch of non-linear image processing and analysis that concentrates on the geometric structure within an image.
+The morphological filter, which can be constructed on the basis of the underlying morphological operations, are more suitable for shape analysis than the standard linear filters since the latter sometimes distort the underlying geometric form of the image. Some of the salient points regarding the morphological approach are as follows \cite{Giardina1988}:
+\begin{enumerate}
+	\item Morphological operations provide for the systematic alteration of the geometric content of an image while maintaining the stability of the important geometric characteristics.
+	\item There exists a well-developed morphological algebra that can be employed for representation and optimization.
+	\item It is possible to express digital algorithms in terms of a very small class of primitive morphological operations.
+	\item There exist rigorous representations theorems by means of which one can obtain the expression of morphological filters in terms of the primitive morphological operations.
+\end{enumerate}
+Dilation and erosion are the basic morphological processing operations. They are defined in terms of more elementary set operations, but are employed as the basic elements of many algorithms. Both dilation and erosion are produced by the interaction of a set called structuring element with a set of pixels of interest in the image. The structuring element has both a shape and an origin.
+
+In this paper we present a review of computer-aided methods oriented to malaria parasites detection and segmentation by mathematical morphology based techniques.
+The rest of the paper is organised as follows. Section 2 introduces the adopted materials and methods for malaria-infected peripheral blood cells images analysis. It has been structured in preprocessing, segmentation, feature extraction, feature selection and classification subsections, consistently with a typical pipeline of a computer-aided image analysis process. All the considered works make use of morphological operators in at least one of the phases of image analysis. Section 3 contains an overall discussion about the methods and the conclusions are expressed in section 4.
+
+\section{Materials and methods}
+This section presents a review of some of the main recent studies existing in literature regarding the analysis of malaria infected blood smears using mathematical morphology.
+A typical approach usually comprises five different image processing and analysis tasks, as follows:
+\begin{enumerate}
+	\item Pre-processing.
+	\item Segmentation.
+	\item Feature extraction.
+	\item Feature selection.
+	\item Classification.
+\end{enumerate}
+Since morphological techniques have been used in the first three phases, the reviewed works have been divided into the following sub-sections: pre-processing, segmentation and feature extraction.
+Each sub-section contains description about methods that cope with malaria parasites (MP) stained components analysis, both on thin and thick blood smears, without distinction.
+
+%\subsection{Search of related literatures}
+Extensive search of articles has been made in PubMed and Google Scholar search engines based on the keywords: "malaria, mathematical morphology, automated malaria diagnosis" up to October  2017. The search includes papers published in English and titles and abstracts of potentially relevant studies were selected and presented from the most recent ones. Thereafter, the full texts of these studies were evaluated as per the exclusion criteria.
+
+%TODO inserire descrizione tabella "una sintesi dei lavori presi in considerazione è mostrata nella tabella X, bla bla bla ... Some works are missing because...
+
+%\subsection{Blood smear staining techniques}
+Two main factors are generally considered if we refer to staining techniques: the type of colouration, in which Giemsa and Leishman are the most common, and the thickness of blood slide, which may be thick or thin.
+The majority of studies have been employed on thin blood smear images (over two-third of the total count) while only a few have used thick blood smear images.
+Typically, thin smears permit the identification of specific parasitic stage and quantification of malaria parasite; on the other hand, thick smears are better if the target is to perform an initial identification of malaria infection using blood pathology. Some examples are shown in fig. \ref{fig:thick_thin_film}.
+Giemsa stained blood smear is considered in most of the analysed literatures whereas Leishman stain is considered in few studies, as showed in table \ref{tab:summary_table}.
+
+It is reported that Leishman stain has bigger sensitivity for parasite detection than Giemsa \cite{Khan2014} and is superior for visualization of red and white blood cell morphology. \cite{Sathpathi2014}. On the contrary, Giemsa stain highlights both malaria parasites and white blood cells and, therefore, it is an additional issue to deal with.
+Giemsa stain is much costly and also time-taking procedure than Leishman.
+Moreover, magnification of 100X by using an oil immersion objective is used for capturing microscopic images of thin blood smear for identification of specific parasites and their infected stage.
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[height=0.15\textheight]{img/f2_ThickGiemsa}
+	\includegraphics[height=0.15\textheight]{img/f2_ThickLeishman}
+	\includegraphics[height=0.15\textheight]{img/f2_ThinGiemsa}
+	\includegraphics[height=0.15\textheight]{img/f2_ThinLeishman}
+	\caption{\label{fig:thick_thin_film}Malaria infected blood smear images. From top left, clockwise: thick smear with Giemsa stain, thick smear with Leishman stain, thin smear with Leishman stain, thick smear with Giemsa stain \cite{Das2015}. Arrows in top images indicate chromatin dots while, in the bottom ones, they show the infected erythrocytes.}
+\end{figure}
+
+
+\subsection{Preprocessing}
+In image analysis field, especially when we refer to complex computer-aided pipelines, pre-processing methods are particularly used in order to improve the image data by suppressing unwanted noise or enhancing some image features for further processing.
+%Typically, pre-processing methods are classified according to the following schema:
+%\begin{enumerate}
+%	\item pixel brightness transformations;
+%	\item geometric transformations;
+%	\item pre-processing methods that use a local neighbourhood of the processed pixel;
+%	\item image restoration that requires knowledge about the entire image.
+%\end{enumerate}
+It is worth to mention pre-processing methods because they are an important step regarding image analysis field but, for what concerns the malaria-affected blood image analysis, in our review we particularly found methods which operate for illumination correction and noise filtering purposes.
+Generally speaking, digital microscopy images can be acquired in different lighting conditions, with several types of acquisition devices or from blood smears stained with various staining protocol and, consequently, the features of similar images could differ a lot.
+Different techniques for illumination correction have been suggested to reduce such variation, e.g., a lot of authors work with grayscale-converted images as an illumination correction method %\cite{Tek2010},\cite{Das2015},\cite{Tek2006}.
+On the other hand, noise filtering aims to remove the noise introduced by mishandling the slides and/or the camera settings.
+
+The system proposed in \cite{Oliveira2017} is based on image processing, artificial intelligence techniques and an adapted face detection algorithm to identify Plasmodium parasites. The algorithm uses the integral image and haar-like features concepts, and weak classifiers with adaptive boosting learning. The search scope of the learning algorithm is reduced in the preprocessing step by removing the background around blood cells.
+%Morphological operations have been applied to images to enhance the geometric structures on a set of pixels. In particular, an erosion operation has been applied after a Gaussian filtering in order to locate the RBCs and restrict the search space of the algorithm.
+%The accuracy of the system was, on average, 91, meaning that for every 100 parasite-infected samples, 91 were identified correctly. The system has been developed for mobile phones and tablets and can represent a useful tool
+%in health centers in remote communities without the need for specific expertise.
+
+In \cite{Romero2016} an algorithm that uses morphological operations, the watershed method, the Hough transform and the clustering method of k-means to detect overlapped RBCs is presented. In the pre-processing stage white blood cells and platelets are removed before the segmentation task. During this step, some noise, the WBC cytoplasm and platelets still remain on the image. Therefore, the small objects are removed using a morphological opening and then the image is dilated with a disc-shaped structuring element.
+
+An edge-based segmentation of erythrocytes infected with malaria parasites using microscopic images is proposed in \cite{Somasekar2015}.  A fuzzy C-means clustering is applied to extract infected erythrocytes, which is further processed for the final segmentation. The experimental results showed that the proposed method can gain 98\%, 93.3\%, 98.65\% and 90.33\% of sensitivity, specificity, prediction value positive and prediction value negative, respectively. A morphological erosion is used to erase some small noises and spots before the segmentation and holes inside the infected erythrocytes are filled using a morphological hole filling operation for the final segmentation.
+The work \cite{Reni2015} proposes a new algorithm for morphological filtering of the blood images as a pre-processing tool for segmentation. Conventional morphological closing on blood images removes the unwanted components but also useful information. On the opposite the proposed method preserves the necessary information of foreground components while removing noise and artefacts.
+The paper in \cite{Kareem2012_1} illustrates a morphological approach for blood cell identification and uses the image features such as intensity, histogram, relative size and geometry for further analysis. Before the identification of blood cells, the authors  propose a novel morphological filtering based on the size of RBC for platelets and/or artifacts elimination. A dilation is performed by a concentric ring structuring element and erosion by disk shaped structuring element. The radius of the structuring element depends on the radius of the RBC, so that all the components smaller than the RBCs are removed.
+In \cite{Tek2010} a complete framework to detect and identify malaria parasites in images of Giemsa stained thin blood film specimens is proposed. Also, the system is able to identify the infecting species and life-cycle stages.
+The preprocessing step of the proposed method is applied to reduce the variations in the observed size, intensity, and colour of the cells and stained objects before the detection and classification steps. The aim is to correct the non-uniform illumination in the images. The estimation is based on a morphological closing operation using a sufficiently large structuring element. The "sufficiently" large size for an input image is determined automatically with respect to its average cell size computed from the area granulometry distribution.
+In the method proposed in \cite{Sheik2013} the first phase is the stain object extraction which extracts candidates objects that can be infected by malaria parasites by using intensity and colour. Before extracting the stained objects the method firstly extracts the foreground and enhanced images. Foreground image is a binary image which is produced after applying morphological hole filling on such pixels which have lower intensity value than average intensity value of green layer. After the stained objects extraction process, a series of morphological operations is also employed after every part in order to eliminate small components and complete the final stained objects.
+
+%Median filter is often used for reducing impulse noise. Several studies have used it to enhance microscopic images of peripheral blood smear towards characterization of malaria followed by adaptive or local histogram equalization. Local low pass filter and local adaptive histogram equalization techniques have also been applied to enhance the pathological image quality. Das et al. \cite{Das2015} showed that geometric mean filter provides better performance towards enhancing peripheral blood smear images. Another preprocessing method like space-time manifolds-based image mosaicing has been used to obtain large field of view \cite{Zou2010} towards identifying malaria parasites, while Di Ruberto et al. \cite{Put16c} proposed an approach to overcome the problem of uneven illumination conditions in image acquisition. For this purpose they designed an illumination pattern that simulates the classic visual defects introduced by the digital microscope lenses, that
+%is the vignetting effect. Starting from the smallest radius, they applied different illumination patterns, created modifying the radius of the Gaussian curve, to the original images. Then, a similarity value measures the difference in terms of pixels between the original images and the corrupted ones.
+
+\subsection{Segmentation}
+Segmentation is a key step in image analysis because it permits the identification and separation of the regions that compose an image, according to certain criteria of homogeneity and separation. Its main target is to divide the image into parts that have a strong correlation with objects or areas of the real world contained in the image.
+The commonly used segmentation methods essentially operate considering characteristics such as the brightness value, colour and reflection of the individual pixels, identifying groups of pixels that correspond to spatially connected regions. As for many problems of image processing, there is no standard solution valid in general, so different segmentation techniques can be applied, according to the characteristics of the images to process and of the objects to segment.
+Medical images segmentation is typically performed using two main strategies: the first level aims to separate whole cells or tissues from the background and the second one aims to separate the tissue structure in different regions or the cell in their components as the nucleus from the cytoplasm or intracellular parasites. The latter case is commonly used in applications in which the cell class depends on the morphological characteristics of its components.
+%The segmentation techniques can generally be divided into three main categories: Pixel Based, Edge Based and Region Based.
+%
+%%\subsection{Erythrocytes segmentation}
+%%\subsubsection{Thresholding}
+%%THRESHOLDING METHODS
+
+Several other authors attempted to use thresholding as segmentation method in their computer-aided systems.
+In \cite{Ross2006} the authors propose a method which provides a positive or negative diagnosis of malaria and differentiates parasites by species. The segmentation step relies on a thresholding strategy which aims to identify and segment potential parasites and erythrocytes from the image background after a six steps threshold selection. Mathematical morphology has been used for parasite size estimation, erythrocytes reconstruction and cells bigger than erythrocytes removal.
+%
+%Makkapati and Rao proposed two different methodologies. The first one \cite{Makkapati2009} is based on HSV colour space with the purpose of performing a red blood cells (RBCs) segmentation and an identification of RBCs affected from MP with a chromatin dot identification by thresholding the Saturation channel. The RBCs segmentation is achieved by dividing the entire hue range of $360^{\circ}$ into six segments and finding the dominant colour type to be the representative of the background. On the other hand, the second work \cite{Makkapati2011} is devoted to the detection of the parasite stage and identification of the species. It is based on ontological description and uses the morphology of the two basic components of a parasite, namely, chromatin dot(s) and cytoplasm. The authors state that the green component of an image offers maximum separation between the background and RBC pixels. The green component is first segmented to detect the RBCs by choosing an optimal threshold [10]. The pixels belonging to chromatin dots have higher saturation values and are segmented by thresholding the saturation component of the image. However, several artefacts may also be segmented as chromatin
+%dots, so a further evaluation is performed to establish if a chromatin dot is valid by identifying whether it is inside a RBC or not.
+%
+The authors in \cite{Kareem2011} used the Annular Ring Ratio (ARR) transform method. Before applying it, a pre processing phase for removing platelets, parasites and other artefacts in the image has been performed. In the proposed method, the image after being converted to grayscale undergoes a morphological opening similar to closing. Unlike conventional closing (dilation followed by erosion) which uses the same structuring element, two different structuring elements are used, a concentric ring for dilation and a disk for erosion. The inner and outer diameter of the dilation ring is set to 35\% and 70\% of RBCs size, respectively and the erosion disk has the same diameter. Therefore, considering that fixed manually defined parameters are used for this strategy, the results may substantially differ depending on the image resolution. This approach results in locating only the stained components in the image instead of all the cells and hence will not only speed up the operation but reduces the complexity.
+%
+%The morphology of P.falciparum at gametocyte stage is the key parameter in the segmentation approach proposed in \cite{Kareem2012}. It is based on a modification of the ARR transform. The method can be used as an efficient tool for gametocyte detection for post-treatment malaria diagnosis. It also identifies the presence of any White Blood Cells (WBCs) in the image, and discards other artefacts and non infected cells. It utilizes the information based on structure, colour and geometry of the cells and does not require any segmentation or non-illumination correction techniques that are commonly used for cell detection.
+%
+%Fang et al. \cite{Fang2011} used a threshold to distinguish the unhealthy cells from the healthy cells after a malaria detection phase performed with a phase spectrum methodology. This method uses a the Quaternion Fourier Transform (QFT) to obtain the amplitude and phase spectrum for blood smear images. Then, the reconstructed image is obtained using the Inverse Quaternion Fourier transform (IQFT) on a constant amplitude spectrum and the original phase spectrum. The authors concluded that B and G channels from the RGB colour space and I channel from the HSI colour space are the most sensitive channels for MP detection.
+%
+Anggraini et al. \cite{Anggraini2011} proposed a method for separating blood cells, parasites and other components from background in a microscopic field of a thin blood smear. They applied several global thresholding methods and visually compared the results to qualitatively determine which technique yields the best result. The binary image was then subjected to hole filling morphological operator and applied as marker to label blood cells. From each identified cell (RBC and WBC), constituents of the parasite (nucleus and cytoplasm) were extracted using multiple threshold.
+%
+Savkare et al. \cite{Savkare2011} worked on thin blood films with Giemsa staining and used global threshold and Otsu threshold \cite{Otsu1975} on grayscale enhanced image (green channel) for separating foreground from background. Hole filling has been performed on identified cells and morphological operators have been used to identify overlapping cells. Then, watershed transform has been applied for separating overlapped cells.
+%
+In \cite{Ghosh2011}, authors used divergence based threshold selection in order to segment P.vivax parasites from Leishman-stained thin blood films. This method is based on Cauchy membership function \cite{Put14a} and is applied to the C channel of CMYK colour space. Morphological operators of opening and closing have been used for artefacts removal.
+%
+Tek et al. \cite{Tek2010} addressed the problem of parasite detection and identification on thin blood film. They performed a pre-processing phase, in which morphology has been used with a granulometry-based cell size estimation, considering the peak index of the granulometry distribution as the average cell area.
+Then, two different segmentation steps followed: the foreground-background segmentation has been realized using morphological area top-hats (using the average cell area value) and morphological double thresholding; the stained pixels segmentation has been performed by modelling the stained and unstained pixel distribution with RGB space histograms and used the probability density function to determine if a pixel is stained or not. This work also addresses non-uniform illumination problem, removing it by using a pre-recorded illumination image or using a morphological closing operation.
+%
+%Malihi et al. \cite{Malihi2013} proposed a method for malaria parasite detection in Giemsa-stained blood samples. They used both binary image masks obtained with Otsu method and the edge detection images from Canny method for RBC segmentation, followed by a hole filling process.
+%
+Authors in \cite{Arco2015} worked on thick blood films and proposed a method that uses an adaptive thresholding based scheme, which also allows an effective classification of pixels. This means that the election of whether a pixel belongs to the background or to the signal (parasites and white blood cells) is only established by the pixels around it, that is its neighbourhood. Then, morphological methods are applied to evaluate the area of connected components, labelling those belonging to parasites and counting their number. The following strategy has been used:
+\begin{enumerate}
+	\item an algorithm based on run-length encoding has been used for analysing the connected components of the binary masks obtained in segmentation phase;
+	\item preliminary tagging, keeping the label equivalences or connected regions with different labels in a table of local matches. Resolution of the equivalences is, then, performed;
+	\item measurements on the remaining connected components: WBCs and MP region areas are checked and WBCs connected components are removed with a closing operation.
+\end{enumerate}
+%
+Also in the method proposed in \cite{Somasekar2017} the segmentation of the infected parasites is based on thresholding. The segmentation is achieved in two stages by maximizing between-class variance of an original image and consequently by an iterative threshold selection from a stage-one threshold image with suitable stopping criteria. The segmented results are post processed to improve the accuracy of the detection of malaria
+parasites by morphological operators (erosion and closing). 
+
+
+Mushabe et al. \cite{Mushabe2013} used morphological and statistical classification to detect malaria in blood smears by identifying and counting red blood cells and Plasmodium parasites. Morphological operations and histogram-based thresholding are used to extract RBCs and boundary curvature calculations and Delaunay triangulation are used for splitting clumped RBCs. They worked on Giemsa-stained thin blood smears.
+%
+The proposed automated method in \cite{Elter2011} for parasite detection and identification worked on thin blood film acquired with Giemsa stain. The authors found that the G and B channels of the RGB colour are very good features to identify objects containing chromatin in Giemsa stained blood films, being not only considered highly discriminative but also almost independent of differences in illumination and staining intensity. They transformed the colour input image into a monochrome image \textit{I(x,y)}, that highlights objects containing chromatin: $ I(x,y) = arctan \frac{I_{green}(x,y)}{I_{blue}(x,y)} $. In this work, mathematical morphology has been used with a black top-hat operator to separate MP from both leukocytes and platelets, with a non-flat paraboloid structuring element of radius of 9 and a slope of 1 pixel. It should be taken into account that these fixed parameters might not be suitable for images with different pixel resolutions. The black top-hat operator is followed by a thresholding operation with a fixed threshold, which according to the authors is reliable given the independence of the G and B channels with regard to illumination and staining intensity. However, the authors do not define the value of this fixed threshold on the publication.
+%
+%% Morphology and/or granulometry in Segmentation stage:
+Di Ruberto et al. \cite{DiRuberto2002} aimed to detect the parasites by means of an automatic thresholding based on a morphological approach applied to cell image segmentation, that is more accurate than the classical watershed-based algorithm. They have applied grey scale granulometries based on opening with disk-shaped elements, flat and hemispherical. They have used a hemispherical disk-shaped structuring element to enhance the roundness and the compactness of the red cells improving the accuracy of the classical watershed algorithm, while they have used a disk-shaped flat structuring element to separate overlapping cells. These methods make use of the red blood cell structure knowledge, that is not used in existing watershed-based algorithms.
+%
+Soni et al. \cite{Soni2011} performed segmentation of erythrocytes by using granulometry as well. The size and eccentricity of the erythrocytes are also required for the calculation of some feature values (as these can be indicative of infection). The shape of the objects (circular erythrocytes) is known a priori, but the image must be analysed to determine the size distribution of objects in the image and to find the average eccentricity of erythrocytes present.
+Gray-scale granulometries based on opening with disk shape elements are then used. Non flat disk shaped structural element are applied to enhance the roundness and compactness of the red blood cells and flat disk shaped structural element applied to segment overlapping cells. The object to be segmented differs greatly in contrast from the background image. Changes in contrast can be detected by operators that calculate the gradient of an image. The gradient image can be computed and a threshold can be applied to create a binary mask containing the segmented cell. The binary gradient mask is dilated using the vertical structuring element followed by the horizontal structuring element. The cell of interest has been successfully segmented, but it is not the only object that has been found. Any objects that are connected to the border of the image can be removed.
+%
+Also Airwhar et al. \cite{Ahirwar2012} based their approach on thresholding and granulometry. The histogram of the complemented, green component has been used and it is said to be a bimodal distribution in all the considered images. Then, both local and global thresholds are used, and the union of the two binary images is chosen as the parasite marker image. A morphological opening filter, using a disk-shaped SE with radius equal to the mean erythrocyte radius less the standard deviation, is applied to the grayscale morphologically filtered green component of the image to remove any objects smaller than an erythrocyte.
+The morphological gradient is then calculated using a diamond-shaped SE with unity length. The segmentation method is applied to each object in the reconstructed binary image of erythrocytes individually. Those objects that do not exceed the area of a circle with radius equal to the mean erythrocyte radius plus the standard deviation are regarded as being single cells, and are unmodified.
+On the other hand, the clumped cells are segmented as follows. First, the intersection of the morphological gradient image and the dilated cell cluster is taken. This image is then transformed to a binary image by thresholding any value greater than zero. A series of morphological operations, namely a closing operation, thinning, and spur removal are then applied to generate a contour of the segmented erythrocytes. The contours are filled, and the segmented mask is again reconstructed with the valid parasite marker image to result in a segmented mask of infected cells.
+%
+Several authors used marker controlled watershed with morphological approach.
+Khan et al. \cite{Khan2011}, among other experimentations, used it in order to try to separate overlapping cells because, according to their statements, watershed transform can separate touching cells but it is not sufficient for overlapping cells.
+In \cite{Springl2009} red blood cell segmentation has been performed by using marker-controlled watershed transformation based on the image gradient. Markers are computed as a combination of the binary mask of the red blood cells and centres of the cells which are computed using a similar algorithm that was utilized for the evaluation of the average cell radius. The binary mask is obtained by thresholding the grey-scale image with an automatically estimated threshold using Otsu method\cite{Otsu1975}.
+Das et al. \cite{Das2011}, \cite{Das2013}, \cite{Das2012}, \cite{Das2015} segmented erythrocytes as aforesaid and then morphological operators are used to eliminate unwanted cells like leukocytes and platelets. To conclude, overlapping erythrocytes are segmented by using marker controlled watershed segmentation technique.
+
+In the paper \cite{Devi2017} the authors propose a computer assisted system for quantification of erythrocytes in microscopic images of thin blood smears. The proposed method consists of preprocessing, segmentation, morphological filtering, cell separation and clump cell segmentation. The performance of the system in classifying the isolated and clump erythrocytes by geometric features is evaluated for the different classifiers. Moreover, the clump erythrocytes are segmented using marker controlled watershed with h-minima as internal marker. Based on the experimental results, it may be concluded that the proposed model provides satisfactory results with an accuracy of 98.02\% in comparison to the state of art.
+
+%
+%%BOUNDARY BASED METHODS \subsubsection{Boundary based methods}
+%Zou et al. \cite{Zou2010} based their method on the consideration that RBCs have a circular shape. They propose an improved version of the Circle Hough Transform (CHT) for RBCs detection. The authors state that overlapping and oval cells can be detected as well as non-clumped RBCs and affirm that the green channel of the RGB colour space permits to better distinguish RBCs. However, some RBCs may not have circular shape and it could affect the detection results.
+%
+In \cite{Yunda2012}, Yunda et al. proposed a method for P.vivax parasites detection. The segmentation phase is a combination of border and region detection that allows rejection of the image background and permits identifying each of the objects. Initially, the morphological gradient method is used to enhance the borders of previously found objects. This is followed by a threshold detection stage using the K-Median method.
+Furthermore, Laplacian operator was used to discriminate the pixels that are interior or exterior in relation to the regions of the images and then erosion operation followed by two dilations were applied to delete the pixels which did not make part of any object. In the end, Absence of Gradients and Nernstian Equilibrium Stripping (AGNES) and K-Median techniques were applied to assign the remaining number of pixels to each region, using the image regions previously identified as objects and background as the starting point.
+%
+%%CLUSTERING METHODS \subsection{Clustering methods}: no method uses mathematical morphology applied to clustering.
+%
+%%CLASSIFIER-BASED METHODS \subsection{Classifier-based methods}
+Tek et al. \cite{Tek2006} proposed a classifier-based method, for the segmentation stage, which relies on a Bayesian pixel classifier to distinguish among stained and non-stained pixels. In particular, they used a non-parametric method based on histograms in order to produce the probability density functions of stained and non-stained classes. Stained pixels can belong to other components such as WBCs, platelets or artefacts, in addition to the parasites and so the detection procedure requires a further classification to distinguish among parasite and non-parasite pixels. However, the stained pixels have to be represented as connected sets, representing stained objects, to extract features for the classifier. Furthermore, top-hat extraction and infinite reconstruction were applied to find the regions that include the objects.
+%
+\subsection{Feature extraction}
+Feature extraction has the target of reducing the computational complexity of the subsequent process and facilitating a reliable and accurate recognition for unknown novel data, considering that the input data to an algorithm could be too large to be processed and it could be redundant (e.g. repetitiveness of pixels patterns in an image). Moreover, the in-depth understanding of the domain-specific knowledge gained by human experts on the problem being addressed can be of extreme importance for the design of a reliable and effective feature extraction engine \cite{Jiang2009}.
+It starts from determining a subset of the initial features and this procedure is called feature selection. The selected features are expected to contain the relevant information from the input data, so that the desired task can be performed by using this reduced representation instead of the complete initial data.
+Malaria parasite infection causes micro structural changes in erythrocytes. The microscopic features of the RBCs are usually specific to morphology, intensity and texture. They may also represent the differences that occur among healthy and unhealthy cells. Most of the studies have reported both textural and geometric features for describing malaria infection stages \cite{Das2015}.
+Generally speaking, features may be distinguished according to the following characteristics: morphological features and textural and intensity features.\\
+It is a well known mathematical morphology approach to compute a size distribution of grains in binary images, using a series of morphological opening operations. It is the basis for the characterization of the concept of size. Some authors used area granulometry for pre-processing purposes in malaria characterization \cite{Tek2010} even though it is certainly effective for extracting cells size features information \cite{Tek2006},\cite{Malihi2013},\cite{Springl2009}.
+%
+%
+%%\input{Test.tex}
+%
+%\section{Discussions}
+%A comprehensive synthesis of the analysed works is presented in table \ref{tab:summary_table}. It only considers the methods which employed mathematical morphology in at least one step of the pipelines and it has been structured by considering the following information: staining technique, segmentation methods, extracted features, classification strategy, specificity and sensitivity percentages relative to the classification steps.
+%Most of the studies are based on P. vivax and P. falciparum characterization.
+%With regards to the showed approaches and related results, it is clear that malaria parasites detection and segmentation techniques in microscopic images needs further experiments and improvements. In general, the analysed works have been tested with a limited number of images and the datasets are not publicly available; therefore, a comparison between different approaches is very difficult. Despite promising results reported during the past years, the great majority of the computer-aided methods found on the literature for malaria diagnosis are based on images acquired under well controlled conditions and with proper microscopic equipment. However, one should take into account that 80\% of malaria cases occur in Africa, where this type of equipment is scarce or even nonexistent in common healthcare facilities \cite{Rosado2016}.
+%Moreover, this review showed that P. falciparum is the most analysed if we refer to segmentation and detection, considering that it is the most widespread among malaria parasite types.
+%The majority of the works used thin blood smear. It is typically used for identification of malaria infected
+%stages, types of parasitic infection and percentage of parasitemia, while thick blood smear is used for identification of and quantification of malaria parasite count against leukocyte count per microliter blood.
+%Pre-processing phase is typically taken on with filters and the most used in the analysed works is certainly the median filter which permits to preserve sharp edges. Apart from the classic histogram equalization and contrast stretching techniques, other filters have been employed, e.g., geometric mean filter to remove Gaussian noise preserving edges, Laplacian filter, in order to find edges, and so on.
+%Median filter has been found to be effective for reducing impulse noises from the microscopic images, even though recent studies have shown that geometric mean filter provides better performance than the median filter \cite{Das2013}, \cite{Das2015}.
+%
+%Malaria parasites may be discriminated according to two different strategies: by segmenting the whole erythrocyte from the blood smear image on the basis of which malaria infection is detected, otherwise by segmenting chromatin dot or parasite infection region for characterizing parasite infection stages based on some extracted target features.
+%In general, thresholding-based approach is still widely used for segmentation purposes. In particular, a lot of authors affirm that Otsu thresholding suffers from limitations when textural variation is high, while histogram thresholding can not deal sufficiently good in identifying valley regions in case of unimodal histograms. Another greatly used segmentation approach is clearly the watershed transform. The classic watershed approach is reported to produce over segmentation results \cite{Savkare2011}, whereas the marker controlled approach does not suffer from this issue and it is reported to be very effective for overlapping cells segmentation even though some authors affirm that it may fail to segment highly overlapped cells \cite{Khan2011}, \cite{Springl2009}. Other authors \cite{Ahirwar2012}, \cite{DiRuberto2002}, \cite{Soni2011}, employed granulometry and stated that it is very effective to segment cells with regular size.
+%The analysed works performed classification phase for different purposes. The majority of them aimed to distinguish among two classes \cite{Anggraini2011}, \cite{Annaldas2014},  \cite{Das2015}, \cite{Fang2011}, \cite{Ghosh2011}, \cite{Kareem2012}, \cite{Mushabe2013}: malaria infected and noninfected RBCs, whereas more complex classification strategies aimed to classify from three \cite{Das2012}, \cite{Maity2012} to up to seven different classes \cite{Das2013}, \cite{Das2015}, \cite{Makkapati2011}, \cite{Malihi2013}.
+%
+%\section{Conclusions}
+%This work reviewed several computational microscopic imaging techniques oriented to mathematical morphology approach, proposed in literature for malaria parasites detection and segmentation in blood smear microscopic images.
+%
+%The computer vision methodologies reported in the literature are based on light microscopic images of human peripheral blood smears for computer-aided detection of malaria parasite and its various stages. Image pre-processing, segmentation of erythrocytes and parasites, malaria parasite feature extraction, malaria detection techniques have been discussed here.
+%
+%It is worth to remember that mathematical morphology techniques have been widely used for image processing purposes. Among the application fields, it has been applied for fingerprint feature extraction, recognition of handwritten digits, license plate detection, border extraction, denoising using morphological filters, text extraction and detection of imperfection in printed circuit boards \cite{Kaur2013}. Apart from this kind of fields, mathematical morphology has been employed in biomedical image analysis, especially in pre-processing and segmentation techniques.
+%
+%Morphological cell analysis is used to face off abnormality identification and classification, early cancer detection. It has been integrated in new methods for biomedical applications,
+%such as automatic segmentation and analysis of histological tumour sections, boundary detection of cervical cell nuclei considering overlapping and clustering, the granules segmentation and spatial distribution analysis, morphological characteristics analysis of specific biomedical cells, understanding the chemotactic response and drug influences, or identifying cell morphogenesis in different cell cycle progression.
+%Morphological feature quantification for grading cancerous or precancerous cells is especially widely researched in the literature, such as nuclei segmentation based on marker-controlled watershed transform and snake model for hepatocellular carcinoma feature extraction and classification, which is important for prognosis and treatment planning, nuclei feature quantification for cancer cell cycle analysis, and using feature extraction including image morphological analysis, wavelet analysis, and texture analysis for automated classification of renal cell \cite{Chen2012}.
+%
+%Moreover, non-linear filtering has become increasingly important in many image processing applications. Initially, the attraction to non-linear filters was mostly limited to the impulse-removing and edge-preserving qualities of the median filter. However, as the number and sophistication of non-linear filters have increased, so has the variety of applications for these filters. The shape-based methods of mathematical morphology, in particular, are now used in a wide variety of medical applications, including electrocardiography, ultrasound imaging, radiology, and histologic image analysis \cite{Schulze1994}.
+%
+%Furthermore, microscopic image analysis and, in particular, malaria detection and classification can greatly benefit from the use of mathematical morphology. The interest in this approach to image processing ad analysis is proved by the increasing number of works proposing methods for malaria image analysis based on mathematical morphology techniques.
+%
+%It is worth to mention that the development of new mobility-aware microscopic devices (and ideally low cost) is an area that can greatly improve the chances of the successful deployment of computer vision CAD solutions for malaria diagnosis in the field.
+%The mobile phone is currently Africa's most important digital technology, and is boosting African health as it emerges as a platform for diagnosis and treatment.
+%Considering the recent significant improvements of the new generation of mobile devices in terms of image acquisition and processing power, if a reliable automatic diagnostic performance is ensured through the usage of those devices, one would dramatically reduce the effort in the exhaustive and time consuming activity of microscopic examination.
+%Moreover, the lack of highly trained microscopists on malaria diagnosis in rural areas could then be complemented by a significantly less specialized technician that knows how to operate the system and prepare blood smears. The usage of mobile devices in the system architecture can also bring significant improvements in terms of portability and data transmission. Finally, malaria diagnosis might be just one
+%element of a suite of diagnostic software tests running on this type of system. Several other tests could simultaneously be carried out using the same images, for instance cell counting or detection of other hemoparasites like microfilaria or trypanosoma \cite{Rosado2016}.
+
+\inputencoding{latin2}
+\bibliographystyle{plain}
+\bibliography{main}
+\inputencoding{latin1}
+
+\end{document} 
