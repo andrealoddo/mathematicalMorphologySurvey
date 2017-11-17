@@ -195,7 +195,7 @@
 	
 	The work \cite{Reni2015} proposes a new algorithm for morphological filtering of the blood images as a pre-processing tool for segmentation. Conventional morphological closing on blood images removes the unwanted components but also useful information. On the opposite the proposed method preserves the necessary information of foreground components while removing noise and artefacts.
 	
-	The paper in \cite{Kareem2012_1} illustrates a morphological approach for blood cell identification and uses the image features such as intensity, histogram, relative size and geometry for further analysis. Before the identification of blood cells, the authors  propose a novel morphological filtering based on the size of RBC for platelets and/or artifacts elimination. A dilation is performed by a concentric ring structuring element and erosion by disk shaped structuring element. The radius of the structuring element depends on the radius of the RBC, so that all the components smaller than the RBCs are removed.
+	The paper in \cite{Kareem2012} illustrates a morphological approach for blood cell identification and uses the image features such as intensity, histogram, relative size and geometry for further analysis. Before the identification of blood cells, the authors  propose a novel morphological filtering based on the size of RBC for platelets and/or artifacts elimination. A dilation is performed by a concentric ring structuring element and erosion by disk shaped structuring element. The radius of the structuring element depends on the radius of the RBC, so that all the components smaller than the RBCs are removed.
 	
 	In \cite{Tek2010} a complete framework to detect and identify malaria parasites in images of Giemsa stained thin blood film specimens is proposed. Also, the system is able to identify the infecting species and life-cycle stages.
 	The preprocessing step of the proposed method is applied to reduce the variations in the observed size, intensity, and colour of the cells and stained objects before the detection and classification steps. The aim is to correct the non-uniform illumination in the images. The estimation is based on a morphological closing operation using a sufficiently large structuring element. The sufficiently large size for an input image is determined automatically with respect to its average cell size computed from the area granulometry distribution.
@@ -220,6 +220,8 @@
 	
 	Several other authors attempted to use thresholding combined with morphological operation as segmentation method in their computer-aided systems.
 	
+	Dave et al. in \cite{Dave2017} image segmentation is performed using histogram based adaptive thresholding followed by mathematical morphological operations (erosion and dilatioon). The detection of infected RBC is based on a unsupervised learning technique.
+	
 	In \cite{Ross2006} the authors propose a method which provides a positive or negative diagnosis of malaria and differentiates parasites by species. The segmentation step relies on a thresholding strategy which aims to identify and segment potential parasites and erythrocytes from the image background after a six steps threshold selection. Mathematical morphology has been used for parasite size estimation, erythrocytes reconstruction and cells bigger than erythrocytes removal.
 	%
 	%Makkapati and Rao proposed two different methodologies. The first one \cite{Makkapati2009} is based on HSV colour space with the purpose of performing a red blood cells (RBCs) segmentation and an identification of RBCs affected from MP with a chromatin dot identification by thresholding the Saturation channel. The RBCs segmentation is achieved by dividing the entire hue range of $360^{\circ}$ into six segments and finding the dominant colour type to be the representative of the background. On the other hand, the second work \cite{Makkapati2011} is devoted to the detection of the parasite stage and identification of the species. It is based on ontological description and uses the morphology of the two basic components of a parasite, namely, chromatin dot(s) and cytoplasm. The authors state that the green component of an image offers maximum separation between the background and RBC pixels. The green component is first segmented to detect the RBCs by choosing an optimal threshold [10]. The pixels belonging to chromatin dots have higher saturation values and are segmented by thresholding the saturation component of the image. However, several artefacts may also be segmented as chromatin
@@ -242,7 +244,7 @@
 	%
 	%Malihi et al. \cite{Malihi2013} proposed a method for malaria parasite detection in Giemsa-stained blood samples. They used both binary image masks obtained with Otsu method and the edge detection images from Canny method for RBC segmentation, followed by a hole filling process.
 	
-	The authors in \cite{Arco2015} worked on thick blood films and proposed a method that uses an adaptive thresholding based scheme, which also allows an effective classification of pixels. This means that the election of whether a pixel belongs to the background or to the signal (parasites and white blood cells) is only established by the pixels around it, that is its neighbourhood. Then, morphological methods are applied to evaluate the area of connected components, labelling those belonging to parasites and counting their number. The following strategy has been used:
+	The authors in \cite{Arco2014} worked on thick blood films and proposed a method that uses an adaptive thresholding based scheme, which also allows an effective classification of pixels. This means that the election of whether a pixel belongs to the background or to the signal (parasites and white blood cells) is only established by the pixels around it, that is its neighbourhood. Then, morphological methods are applied to evaluate the area of connected components, labelling those belonging to parasites and counting their number. The following strategy has been used:
 	\begin{enumerate}
 		\item an algorithm based on run-length encoding has been used for analysing the connected components of the binary masks obtained in segmentation phase;
 		\item preliminary tagging, keeping the label equivalences or connected regions with different labels in a table of local matches. Resolution of the equivalences is, then, performed;
@@ -306,7 +308,7 @@
 	In the study presented in \cite{Diaz2009} for quantification and classification of erythrocytes in stained thin blood films infected with Plasmodium falciparum, the authors used connected morphological operators in the segmentation step. The RBCs are detected as follows: firstly, a pixel classification allowed to label each image pixel as either background or foreground, based on its color features. Afterward, an inclusion-tree structure represented the hierarchical object relations between background and foreground so that a filtering process
 	allows to remove irrelevant structures such as artifacts generated at the staining or digitization processes.
 	
-	To conlude many systems for computer aided diagnosis of malaria disease made use of mathematical operatations in order to smoothen the boundary of the regions obtained from the segmentation process, like in \cite{Dave2017}.
+	To conlude many systems for computer aided diagnosis of malaria disease made use of mathematical operatations in order to smoothen the boundary of the regions obtained from the segmentation process.
 	
 	%
 	\subsection{Feature extraction}
@@ -365,6 +367,12 @@
 	Considering the recent significant improvements of the new generation of mobile devices in terms of image acquisition and processing power, if a reliable automatic diagnostic performance is ensured through the usage of those devices, one would dramatically reduce the effort in the exhaustive and time consuming activity of microscopic examination.
 	Moreover, the lack of highly trained microscopists on malaria diagnosis in rural areas could then be complemented by a significantly less specialized technician that knows how to operate the system and prepare blood smears. The usage of mobile devices in the system architecture can also bring significant improvements in terms of portability and data transmission. Finally, malaria diagnosis might be just one
 	element of a suite of diagnostic software tests running on this type of system. Several other tests could simultaneously be carried out using the same images, for instance cell counting or detection of other hemoparasites like microfilaria or trypanosoma \cite{Rosado2016}.
+	
+	
+	\input{Table_sum.tex}
+	
+	
+	
 	
 	\inputencoding{latin2}
 	\bibliographystyle{plain}
