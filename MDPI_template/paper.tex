@@ -26,6 +26,7 @@
 \usepackage{filecontents}
 
 \usepackage[tight,footnotesize]{subfigure}
+
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -87,30 +88,30 @@
 \Title{Recent advances of malaria parasites detection systems based on mathematical morphology}
 
 % Author Orchid ID: enter ID or remove command
-\newcommand{\orcidauthorA}{0000-0000-000-000X} % Add \orcidA{} behind the author's name
+\newcommand{\orcidauthorA}{0000-0002-6571-3816} % Add \orcidA{} behind the author's name
 %\newcommand{\orcidauthorB}{0000-0000-000-000X} % Add \orcidB{} behind the author's name
 
 % Authors, for the paper (add full first names)
-\Author{Firstname Lastname $^{1,\dagger,\ddagger}$\orcidA{}, Firstname Lastname $^{1,\ddagger}$ and Firstname Lastname $^{2,}$*}
+\Author{Andrea Loddo $^{1,\dagger,\ddagger}$\orcidA{}, Cecilia Di Ruberto $^{1,\ddagger}$ and Michel Kocher$^{2,\ddagger}$}
 
 % Authors, for metadata in PDF
-\AuthorNames{Firstname Lastname, Firstname Lastname and Firstname Lastname}
+\AuthorNames{Andrea Loddo, Cecilia Di Ruberto and Michel Kocher}
 
 % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
 \address{%
-$^{1}$ \quad Affiliation 1; e-mail@e-mail.com\\
-$^{2}$ \quad Affiliation 2; e-mail@e-mail.com}
+$^{1}$ \quad Department of Mathematics and Computer Science, University of Cagliari; {andrea.loddo, dirubert}@unica.it\\
+$^{2}$ \quad Biomedical Imaging Group, École Polytechnique Fédérale de Lausanne (EPFL); michel.kocher@heig-vd.ch}
 
 % Contact information of the corresponding author
-\corres{Correspondence: e-mail@e-mail.com; Tel.: +x-xxx-xxx-xxxx}
+\corres{Correspondence: andrea.loddo@unica.it; Tel.: +390706758503}
 
 % Current address and/or shared authorship
-\firstnote{Current address: Affiliation 3} 
+\firstnote{Current address: Via Ospedale 72, 09124, Cagliari, Italy} 
 \secondnote{These authors contributed equally to this work.}
 % The commands \thirdnote{} till \eighthnote{} are available for further notes
 
 % Simple summary
-%\simplesumm{}
+\simplesumm{}
 
 % Abstract (Do not insert blank lines, i.e. \\) 
 \abstract{This paper investigates existing mathematical morphology based techniques applied for performing malaria parasites detection and identification in both Giemsa and Leishman stained blood smears images.
@@ -380,7 +381,7 @@ To conclude many systems for computer aided diagnosis of malaria disease made us
 
 
 %%BOUNDARY BASED METHODS \subsubsection{Boundary based methods}
-%Zou et al. \cite{Zou2010} based their method on the consideration that RBCs have a circular shape. They propose an improved version of the Circle Hough Transform (CHT) for RBCs detection. The authors state that overlapping and oval cells can be detected as well as non-clumped RBCs and affirm that the green channel of the RGB colour space permits to better distinguish RBCs. However, some RBCs may not have circular shape and it could affect the detection results.
+Zou et al. \cite{Zou2010} based their method on the consideration that RBCs have a circular shape. They propose an improved version of the Circle Hough Transform (CHT) for RBCs detection. The authors state that overlapping and oval cells can be detected as well as non-clumped RBCs and affirm that the green channel of the RGB colour space permits to better distinguish RBCs. However, some RBCs may not have circular shape and it could affect the detection results.
 %
 
 \subsection{Feature extraction}
@@ -442,14 +443,15 @@ Moreover, the lack of highly trained microscopists on malaria diagnosis in rural
 Finally, malaria diagnosis might be just one element of a suite of diagnostic software tests running on this type of system. Several other tests could simultaneously be carried out using the same images, for instance cell counting or detection of other hemoparasites like microfilaria or trypanosoma \cite{Rosado2016}.
 
 
-\input{Table_sum.tex}
+%\input{Table_sum.tex}
+\input{Table.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
-\supplementary{The following are available online at www.mdpi.com/link, Figure S1: title, Table S1: title, Video S1: title.}
+%\supplementary{The following are available online at www.mdpi.com/link, Figure S1: title, Table S1: title, Video S1: title.}
 
 % Only for the journal Methods and Protocols:
 % If you wish to submit a video article, please do so with any other supplementary material.
@@ -462,7 +464,7 @@ Finally, malaria diagnosis might be just one element of a suite of diagnostic so
 \authorcontributions{For research articles with several authors, a short paragraph specifying their individual contributions must be provided. The following statements should be used ``X.X. and Y.Y. conceived and designed the experiments; X.X. performed the experiments; X.X. and Y.Y. analyzed the data; W.W. contributed reagents/materials/analysis tools; Y.Y. wrote the paper.'' Authorship must be limited to those who have contributed substantially to the work reported.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\conflictsofinterest{Declare conflicts of interest or state ``The authors declare no conflict of interest.'' Authors must identify and declare any personal circumstances or interest that may be perceived as inappropriately influencing the representation or interpretation of reported research results. Any role of the funding sponsors in the design of the study; in the collection, analyses or interpretation of data; in the writing of the manuscript, or in the decision to publish the results must be declared in this section. If there is no role, please state ``The founding sponsors had no role in the design of the study; in the collection, analyses, or interpretation of data; in the writing of the manuscript, and in the decision to publish the results''.} 
+\conflictsofinterest{The authors declare no conflict of interest.} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
@@ -470,10 +472,9 @@ Finally, malaria diagnosis might be just one element of a suite of diagnostic so
 
 \noindent 
 \begin{tabular}{@{}ll}
-MDPI & Multidisciplinary Digital Publishing Institute\\
-DOAJ & Directory of open access journals\\
-TLA & Three letter acronym\\
-LD & linear dichroism
+WBC &White Blood Cell \\
+RBC & Red Blood Cell \\
+MP & Malaria Parasite \\
 \end{tabular}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
