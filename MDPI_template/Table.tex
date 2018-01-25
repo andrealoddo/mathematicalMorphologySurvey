@@ -3,276 +3,322 @@
 %\small
 \footnotesize
 \newcolumntype{H}{>{\setbox0=\hbox\bgroup}c<{\egroup}@{}}
-\begin{longtable}{C{2.1cm} C{2.4cm} C{2.3cm} H C{2.7cm} C{2.2cm} }
-	%\begin{longtable}{|C{2cm}|c|C{2.5cm}|C{3cm}|C{2.4cm}|c|}
-	
-	\hline
-	\textbf{Authors} & \textbf{Preprocessing} & \textbf{Segmentation} & \textbf{Features} & \textbf{Classification} & \textbf{Performance}  \\[1pt] \hline
-	
-	Ahirwar \emph{et al.}, 2012  &
-	- &
-	thresholding + granulometry, opening, morphological gradient, dilation, closing, thinning, spur removal &
-	- &
-	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
-	- \vspace{0.6cm} \\
-	%\hline
-	
-	Anggraini \emph{et al.}, 2011 &
-	- &
-	thresholding + hole filling &	
-	- &
-	two (\emph{P.falciparum} infected and noninfected) + two life-cycle-stages &
-	SE=93\% SP=99\%
-	\vspace{0.6cm}
-	\\
-	Arco \emph{et al.}, 2014 &
-	- &
-	adaptive thresholding + hole filling, closing, regional minima &	
-	- &
-	two (infected and noninfected) &
-	Acc=96.46\%
-	\vspace{0.6cm}
-	\\
-	Das \emph{et al.}, 2011 &
-	- &
-	marker controlled watershed + opening, closing &	
-	opening, closing  &
-	two (infected and noninfected) &
-	Acc=88.77\%
-	\vspace{0.6cm}
-	\\
-	
-	Das \emph{et al.}, 2013 &
-	- &
-	marker controlled watershed &	
-	- &
-	three (\emph{P.falciparum}, \emph{P.vivax} infected and noninfected) + three life-cycle-stages per species &
-	Acc=84\%
-	\vspace{0.6cm}
-	\\
-	
-	Das \emph{et al.}, 2014 &
-	- &
-	marker controlled watershed &	
-	- &
-	three (\emph{P.falciparum}, \emph{P.vivax} infected and noninfected) + three life-cycle-stages per species &
-	SE=99.72\% SP=84.39\%
-	\vspace{0.6cm}
-	\\
-	
-	Dave \emph{et al.}, 2017 &
-	- &
-	adaptive thresholding + erosion, dilation &	
-	- &
-	two (infected and noninfected) &
-	Acc=97.83\% thin films, Acc=89.88\% thick films
-	\vspace{0.6cm}
-	\\
-	
-	Devi \emph{et al.}, 2017 &
-	- &
-	marker controlled watershed &	
-	- &
-	two (infected and noninfected)  &
-	Acc=98.02\%
-	\vspace{0.6cm}
-	\\
-	
-	Diaz \emph{et al.}, 2009 &
-	- &
-	inclusion tree &	
-	- &
-	two (\emph{P.falciparum} infected and noninfected) + three life-cycle-stages &
-	SE=94\% SP=99.7\% for detection, SE=78.8\% SP=91.2\% for life-stages
-	\vspace{0.6cm}
-	\\
-	
-	Di Ruberto \emph{et al.}, 2002 &
-	area closing, opening &
-	thresholding + granulometry, watershed  transform + skeleton &	
-	skeleton &
-	two (\emph{P.falciparum} infected and noninfected) + three life-cycle-stages &
-	-
-	\vspace{0.6cm}
-	\\
-	
-	Elter \emph{et al.}, 2011 &
-	- &
-	thresholding + black top-hat, dilation &	
-	- &
-	two (infected and noninfected) &
-	SE=97\%
-	\vspace{0.6cm} \\
-	
-	Gonzalez-Betancourt \emph{et al.}, 2016  &
-	morphological filter, erosion-reconstruction, dilation-reconstruction, closing &
-	watershed  transform  &
-	- &
-	- &
-	- \vspace{0.6cm} \\	
-	
-	Ghosh \emph{et al.}, 2011  &
-	- &
-	thresholding + opening, closing  &
-	- &
-	two (\emph{P.vivax} infected and noninfected) &
-	- \vspace{0.6cm} \\
-	
-	Kareem \emph{et al.}, 2011, 2012  &
-	dilation, erosion &
-	-  &
-	- &
-	two (infected and noninfected) &
-	Acc=88\% SE=90\% SP=86\% \vspace{0.6cm} \\	
-	
-	Khan \emph{et al.}, 2011  &
-	area closing &
-	thresholding + granulometry, opening, morphological reconstruction, gradient, dilation &
-	- &
-	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
-	Acc=81\% SE=85.5\% \vspace{0.6cm} \\	
-	
-	Malihi \emph{et al.}, 2013  &
-	closing &
-	area granulometry  &
-	area granulometry &
-	two (infected and noninfected) &
-	Acc=91\% SE=80\% SP=95.5\% \vspace{0.6cm} \\	
-	
-	Mushabe \emph{et al.}, 2013  &
-	closing &
-	thresholding + granulometry, dilation, erosion  &
-	- &
-	two (infected and noninfected) &
-	SE=98.5 SP=97.2\% \vspace{0.6cm} \\	
-	
-	Oliveira \emph{et al.}, 2017  &
-	erosion &
-	-  &
-	- &
-	two (infected and noninfected) &
-	Acc=91\% \vspace{0.6cm} \\
-	
-	Reni \emph{et al.}, 2015  &
-	new morphological filtering &
-	-  &
-	- &
-	- &
-	- \vspace{0.6cm} \\
-	
-	Romero-Rondon \emph{et al.}, 2016  &
-	dilation, opening &
-	marker controlled watershed, erosion  &
-	- &
-	- &
-	- \vspace{0.6cm} \\
-	
-	Rosado \emph{et al.}, 2017  &
-	- &
-	adaptive thresholding + closing  &
-	- &
-	four (\emph{P.falciparum}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) +
-	three life-cycle-stages for species &
-	SE=73.9-96.2\% SP=92.6-99.3\% \vspace{0.6cm} \\
-	
-	Ross \emph{et al.}, 2006  &
-	area closing &
-	thresholding + granulometry, opening, reconstruction, morphological gradient, closing, thinning  &
-	- &
-	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
-	SE=85\% for detection, Acc=73\% for classification
-	\vspace{0.6cm} \\
-	
-	
-	Savkare \emph{et al.}, 2011a  &
-	- &
-	thresholding + hole filling, watershed transform  &
-	- &
-	two (infected and noninfected) &
-	- \vspace{0.6cm} \\
-	
-	Savkare \emph{et al.}, 2011b  &
-	- &
-	thresholding + hole filling, watershed transform  &
-	- &
-	two (infected and noninfected) &
-	SE=93.12\% SP=93.17\% \vspace{0.6cm} \\
-	
-	Savkare \emph{et al.}, 2015  &
-	- &
-	thresholding + watershed transform, erosion, dilation  &
-	- &
-	two (infected and noninfected) &
-	Acc=95.5\% \vspace{0.6cm} \\
-	
-	Sheikhhosseini \emph{et al.}, 2013  &
-	hole filling &
-	thresholding + hole filling, opening  &
-	- &
-	two (infected and noninfected) &
-	Acc=97.25\% SE=82.21\% SP=98.02\% \vspace{0.6cm} \\
-	
-	Somasekar \emph{et al.}, 2015  &
-	erosion &
-	fuzzy C-means clustering + erosion, hole filling  &
-	- &
-	two (infected and noninfected) &
-	SE=98\% SP=93.3\% \vspace{0.6cm} \\
-	
-	Somasekar \emph{et al.}, 2017  &
-	- &
-	thresholding + erosion, closing, hole filling  &
-	- &
-	two (infected and noninfected) &
-	average DSC=0.8 \vspace{0.6cm} \\
-	
-	Soni \emph{et al.}, 2011  &
-	- &
-	thresholding + granulometry, morphological gradient, dilation  &
-	- &
-	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
-	SE=98\% for detection  \vspace{0.6cm} \\
-	
-	{\v{S}}pringl, 2009  &
-	closing &
-	thresholding + marker controlled watershed transform, hole filling, dilation, opening, erosion  &
-	- &
-	two (infected and noninfected) &
-	AUC=0.98 \vspace{0.6cm} \\
-	
-	Sulistyawati \emph{et al.}, 2015  &
-	- &
-	blob analysis + erosion, dilation, opening, closing, hole filling  &
-	- &
-	two (infected and noninfected) &
-	Acc=99.39\% \vspace{0.6cm} \\
-	
-	Tek \emph{et al.}, 2006  &
-	- &
-	top-hat, infinite reconstruction, area granulometry  &
-	area granulometry &
-	two (infected and noninfected) &
-	SE=74\% SP=98\% \vspace{0.6cm} \\
-	
-	Tek \emph{et al.}, 2010  &
-	closing, granulometry &
-	thresholding + granulometry, area top-hat, closing, area granulometry &
-	area granulometry &
-	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) +
-	four life-cycle-stages for species &
-	SE=72\% SP=98\% \vspace{0.6cm} \\
-	
-	Yunda \emph{et al.}, 2012  &
-	- &
-	thresholding + morphological gradient, erosion, dilation  &
-	- &
-	three (\emph{P.falciparum}, \emph{P.vivax} infected, and noninfected) + two life-cycle-stages for \emph{P.falciparum}&
-	SE=77.19\% \\
-	
-	\hline
-	
-	
-	\caption{Summary of analysed methods: morphological operations used in the main phases of analysis, kind of classification and performance measures (Sensitivity, Specificity, Accuracy, if reported).} % needs to go inside longtable environment
-	\label{tab:summary_table}
-\end{longtable}
+    \begin{longtable}{C{2.1cm} C{2.7cm} C{2.2cm} C{2.0cm} C{2.7cm} C{2.0cm} }
+    %\begin{longtable}{|C{2cm}|c|C{2.5cm}|C{3cm}|C{2.4cm}|c|}
 
+		\hline
+    	\textbf{Authors} & \textbf{Preprocessing} & \textbf{Segmentation} & \textbf{MM/SE} & \textbf{Classification} & \textbf{Performance}  \\[1pt] \hline
+
+%    Ahirwar \emph{et al.}, 2012  &
+%    	- &
+%    	thresholding + granulometry, opening, morphological gradient, dilation, closing, thinning, spur removal &
+%    	gray, bin/disk of size depending on RBCs, diamond of size=1 &
+%    	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
+%    	-  \\
+%    	%\hline
+%&   &  &  &  & \\
+    Anggraini \emph{et al.}, 2011 &
+		- &
+		thresholding + hole filling &	
+		gray, bin &
+		two (\emph{P.falciparum} infected and noninfected) + two life-cycle-stages &
+		SE=93\% SP=99\%
+        %\vspace{0.6cm}
+		\\
+&   &  &  &  & \\
+    Arco \emph{et al.}, 2014 &
+		- &
+		adaptive thresholding + hole filling, closing, regional minima &	
+		gray, bin/disk &
+		two (infected and noninfected) &
+		Acc=96.46\%
+		%\vspace{0.6cm}
+        \\
+        &   &  &  &  & \\
+    Das \emph{et al.}, 2011 &
+		- &
+		marker controlled watershed + opening, closing &	
+		gray, bin  &
+		two (infected and noninfected) &
+		Acc=88.77\%
+		%\vspace{0.6cm}
+        \\
+        &   &  &  &  & \\
+    Das \emph{et al.}, 2013 &
+		- &
+		marker controlled watershed &	
+		gray &
+	three (\emph{P.falciparum}, \emph{P.vivax} infected and noninfected) + three life-cycle-stages per species &
+		Acc=84\%
+%		\vspace{0.6cm}
+        \\
+&   &  &  &  & \\
+    Das \emph{et al.}, 2014 &
+		- &
+		marker controlled watershed &	
+		gray &
+	three (\emph{P.falciparum}, \emph{P.vivax} infected and noninfected) + three life-cycle-stages per species &
+		SE=99.72\% SP=84.39\%
+		%\vspace{0.6cm}
+        \\
+&   &  &  &  & \\
+    Dave \emph{et al.}, 2017 &
+		- &
+		adaptive thresholding + erosion, dilation &	
+		bin &
+		two (infected and noninfected) &
+		Acc=97.83\% thin films, Acc=89.88\% thick films
+		%\vspace{0.6cm}
+        \\
+&   &  &  &  & \\
+    Devi \emph{et al.}, 2017 &
+		- &
+		marker controlled watershed &	
+		gray &
+		two (infected and noninfected)  &
+		Acc=98.02\%
+		%\vspace{0.6cm}
+        \\
+&   &  &  &  & \\
+    Diaz \emph{et al.}, 2009 &
+		- &
+		inclusion tree &	
+		gray &
+		two (\emph{P.falciparum} infected and noninfected) + three life-cycle-stages &
+		SE=94\% SP=99.7\% for detection, SE=78.8\% SP=91.2\% for life-stages
+%\vspace{0.6cm}
+		\\
+&   &  &  &  & \\
+    Di Ruberto \emph{et al.}, 2002 &
+		area closing, opening &
+		thresholding + granulometry, watershed  transform + skeleton &	
+		gray, bin/disk, flat and nonflat, with size depending on RBCs &
+		two (\emph{P.falciparum} infected and noninfected) + three life-cycle-stages &
+		-
+%\vspace{0.6cm}
+		\\
+&   &  &  &  & \\
+    Elter \emph{et al.}, 2011 &
+		- &
+		thresholding + black top-hat, dilation &	
+		gray/disk, nonflat with size=9 &
+		two (infected and noninfected) &
+		SE=97\%
+%		\vspace{0.6cm}
+\\
+&   &  &  &  & \\
+    Gonzalez-Betancourt \emph{et al.}, 2016  &
+    	morphological filter, erosion-reconstruction, dilation-reconstruction, closing &
+    	watershed  transform  &
+    	gray/disk with size depending on RBCs &
+    	- &
+    	-
+    %\vspace{0.6cm}
+    \\
+    &   &  &  &  & \\	
+    Ghosh \emph{et al.}, 2011  &
+    	- &
+    	thresholding + opening, closing  &
+    	bin &
+    	two (\emph{P.vivax} infected and noninfected) &
+    	-
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Kamreem \emph{et al.}, 2011, 2012  &
+    	dilation, erosion &
+    	-  &
+    	gray/concentric ring, disk with size depending on RBCs  &
+    	two (infected and noninfected) &
+    	Acc=88\% SE=90\% SP=86\%
+    %\vspace{0.6cm}
+    \\	
+&   &  &  &  & \\
+    Khan \emph{et al.}, 2011  &
+    	area closing &
+    	thresholding + granulometry, opening, morphological reconstruction, gradient, dilation &
+    	gray &
+    	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
+    	Acc=81\% SE=85.5\%
+    %\vspace{0.6cm}
+    \\	
+&   &  &  &  & \\
+    Malihi \emph{et al.}, 2013  &
+    	closing &
+    	area granulometry  &
+    	gray/disk with size depending on RBCs &
+    	two (infected and noninfected) &
+    	Acc=91\% SE=80\% SP=95.5\%
+    %\vspace{0.6cm}
+    \\	
+&   &  &  &  & \\
+    Mushabe \emph{et al.}, 2013  &
+    	closing &
+    	thresholding + granulometry, dilation, erosion  &
+    	gray, bin/disk &
+    	two (infected and noninfected) &
+    	SE=98.5 SP=97.2\%
+    %\vspace{0.6cm}
+    \\	
+&   &  &  &  & \\
+    Oliveira \emph{et al.}, 2017  &
+    	erosion &
+    	gray, bin  &
+    	- &
+    	two (infected and noninfected) &
+    	Acc=91\%
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Reni \emph{et al.}, 2015  &
+    	new morphological filtering &
+    	-  &
+    	gray/anular ring, disk with size depending on RBCs &
+    	- &
+    	-
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Romero-Rondon \emph{et al.}, 2016  &
+    	dilation, opening &
+    	marker controlled watershed, erosion  &
+    	gray, bin/disk with size depending on RBCs &
+    	- &
+    	-
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Rosado \emph{et al.}, 2017  &
+    	- &
+    	adaptive thresholding + closing  &
+    	bin/elliptical with size=3 &
+    	four (\emph{P.falciparum}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) +
+    three life-cycle-stages for species &
+    	SE=73.9-96.2\% SP=92.6-99.3\%
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Ross \emph{et al.}, 2006  &
+    	area closing &
+    	thresholding + granulometry, opening, reconstruction, morphological gradient, closing, thinning  &
+        gray, bin/disk with size=6 and depending on RBCs, diamond with size=1 &
+    	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
+    	SE=85\% for detection, Acc=73\% for classification
+    	 %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Savkare \emph{et al.}, 2011a  &
+    	- &
+    	thresholding + hole filling, watershed transform  &
+    	bin &
+    	two (infected and noninfected) &
+    	-
+%    \vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Savkare \emph{et al.}, 2011b  &
+    	- &
+    	thresholding + hole filling, watershed transform  &
+    	bin &
+    	two (infected and noninfected) &
+    	SE=93.12\% SP=93.17\%
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Savkare \emph{et al.}, 2015  &
+    	- &
+    	thresholding + watershed transform, erosion, dilation  &
+    	bin/disk with size=2 &
+    	two (infected and noninfected) &
+    	Acc=95.5\%
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Sheikhhosseini \emph{et al.}, 2013  &
+    	hole filling &
+    	thresholding + hole filling, opening  &
+    	bin &
+    	two (infected and noninfected) &
+    	Acc=97.25\% SE=82.21\% SP=98.02\%
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Somasekar \emph{et al.}, 2015  &
+    	erosion &
+    	fuzzy C-means clustering + erosion, hole filling  &
+    	bin/square with size=3 &
+    	two (infected and noninfected) &
+    	SE=98\% SP=93.3\%
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Somasekar \emph{et al.}, 2017  &
+    	- &
+    	thresholding + erosion, closing, hole filling  &
+    	bin/square with size=3 &
+    	two (infected and noninfected) &
+    	average DSC=0.8
+    %\vspace{0.6cm}
+    \\
+%&   &  &  &  & \\
+%    Soni \emph{et al.}, 2011  &
+%    	- &
+%    	thresholding + granulometry, morphological gradient, dilation  &
+%    	gray, bin/disk, flat and nonflat, vertical, horizontal &
+%    	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
+%    	SE=98\% for detection
+%    %\vspace{0.6cm}
+%    \\
+&   &  &  &  & \\
+{\v{S}}pringl, 2009  &
+    	closing &
+    	thresholding + marker controlled watershed transform, hole filling, dilation, opening, erosion  &
+    	gray, bin/disk with size depending on RBCs &
+    	two (infected and noninfected) &
+    	AUC=0.98
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Sulistyawati \emph{et al.}, 2015  &
+    	- &
+    	blob analysis + erosion, dilation, opening, closing, hole filling  &
+    	bin &
+    	two (infected and noninfected) &
+    	Acc=99.39\%
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+ Tek \emph{et al.}, 2006  &
+    	- &
+    	top-hat, infinite reconstruction, area granulometry  &
+    	gray, bin &
+    	two (infected and noninfected) &
+    	SE=74\% SP=98\%
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Tek \emph{et al.}, 2010  &
+    	closing, granulometry &
+    	thresholding + granulometry, area top-hat, closing, area granulometry &
+    	gray/disk with size depending on RBCs &
+    	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) +
+    four life-cycle-stages for species &
+    	SE=72\% SP=98\%
+    %\vspace{0.6cm}
+    \\
+&   &  &  &  & \\
+    Yunda \emph{et al.}, 2012  &
+    	- &
+    	thresholding + morphological gradient, erosion, dilation  &
+    	bin &
+    	three (\emph{P.falciparum}, \emph{P.vivax} infected, and noninfected) + two life-cycle-stages for \emph{P.falciparum}&
+    	SE=77.19\% \\
+    	  	
+		 \hline
+		
+				
+	\caption{Summary of analysed methods: morphological operations used in the main phases of analysis, type of MM (gray or binary)/type and size of SE (if reported), kind of classification and performance measures (Sensitivity, Specificity, Accuracy, if reported).} % needs to go inside longtable environment
+	\label{tab:summary_table}
+	\end{longtable}
+
+	
