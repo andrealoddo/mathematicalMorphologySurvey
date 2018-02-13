@@ -9,18 +9,18 @@
 		\hline
     	\textbf{Authors} & \textbf{Preprocessing} & \textbf{Segmentation} & \textbf{MM/SE} & \textbf{Classification} & \textbf{Performance}  \\[1pt] \hline
 
-%    Ahirwar \emph{et al.}, 2012  &
-%    	- &
-%    	thresholding + granulometry, opening, morphological gradient, dilation, closing, thinning, spur removal &
-%    	gray, bin/disk of size depending on RBCs, diamond of size=1 &
-%    	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
-%    	-  \\
-%    	%\hline
-%&   &  &  &  & \\
+    Ahirwar \emph{et al.}, 2012  &
+    	- &
+    	thresholding + granulometry, opening, morphological gradient, dilation, closing, thinning, spur removal &
+    	gray, bin/disk of size depending on RBCs, diamond of size=1 &
+    	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
+    	-  \\
+    	%\hline
+&   &  &  &  & \\
     Anggraini \emph{et al.}, 2011 &
 		- &
 		thresholding + hole filling &	
-		gray, bin &
+		bin &
 		two (\emph{P.falciparum} infected and noninfected) + two life-cycle-stages &
 		SE=93\% SP=99\%
         %\vspace{0.6cm}
@@ -115,17 +115,17 @@
     	-
     %\vspace{0.6cm}
     \\
-    &   &  &  &  & \\	
-    Ghosh \emph{et al.}, 2011  &
-    	- &
-    	thresholding + opening, closing  &
-    	bin &
-    	two (\emph{P.vivax} infected and noninfected) &
-    	-
-    %\vspace{0.6cm}
-    \\
+    %&   &  &  &  & \\	
+%    Ghosh \emph{et al.}, 2011  &
+%    	- &
+%    	thresholding + opening, closing  &
+%    	bin &
+%    	two (\emph{P.vivax} infected and noninfected) &
+%    	-
+%    %\vspace{0.6cm}
+%    \\
 &   &  &  &  & \\
-    Kamreem \emph{et al.}, 2011, 2012  &
+    Kareem \emph{et al.}, 2011, 2012  &
     	dilation, erosion &
     	-  &
     	gray/concentric ring, disk with size depending on RBCs  &
@@ -163,8 +163,8 @@
 &   &  &  &  & \\
     Oliveira \emph{et al.}, 2017  &
     	erosion &
-    	gray, bin  &
-    	- &
+    	-  &
+    	gray, bin &
     	two (infected and noninfected) &
     	Acc=91\%
     %\vspace{0.6cm}
@@ -260,15 +260,15 @@
     	average DSC=0.8
     %\vspace{0.6cm}
     \\
-%&   &  &  &  & \\
-%    Soni \emph{et al.}, 2011  &
-%    	- &
-%    	thresholding + granulometry, morphological gradient, dilation  &
-%    	gray, bin/disk, flat and nonflat, vertical, horizontal &
-%    	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
-%    	SE=98\% for detection
-%    %\vspace{0.6cm}
-%    \\
+&   &  &  &  & \\
+    Soni \emph{et al.}, 2011  &
+    	- &
+    	thresholding + granulometry, morphological gradient, dilation  &
+    	gray, bin/disk, flat and nonflat, vertical, horizontal &
+    	five (\emph{P.falciparum}, \emph{P.vivax}, \emph{P.ovale}, \emph{P.malariae} infected, and noninfected) &
+    	SE=98\% for detection
+    %\vspace{0.6cm}
+    \\
 &   &  &  &  & \\
 {\v{S}}pringl, 2009  &
     	closing &
@@ -310,7 +310,7 @@
     Yunda \emph{et al.}, 2012  &
     	- &
     	thresholding + morphological gradient, erosion, dilation  &
-    	bin &
+    	gray &
     	three (\emph{P.falciparum}, \emph{P.vivax} infected, and noninfected) + two life-cycle-stages for \emph{P.falciparum}&
     	SE=77.19\% \\
     	  	
